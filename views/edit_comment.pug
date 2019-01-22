@@ -1,0 +1,10 @@
+extends layout
+block main
+    .container
+        .row.col-lg-6.col-lg-offset-3
+            form( action='/campgrounds/'+ campgroundId + '/comments/' + comment._id + '?_method=PUT', method="POST" )
+                .form-group.text-center
+                    h1 Edit comment
+                .form-group    
+                    textarea.form-control(name='text')= comment.text
+                button.btn.btn-block.btn-primary(type="submit") Edit comment

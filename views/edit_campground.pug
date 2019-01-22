@@ -1,0 +1,18 @@
+extends layout
+block main
+    .container
+        .row.col-lg-6.col-lg-offset-3
+                form(action="/campgrounds/" + campground._id + '?_method=PUT' method="POST")
+                    .form-group.text-center
+                        h1= 'Edit ' + campground.name
+                    .form-group
+                        input.form-control(type="text" name="campground[name]" value= campground.name)
+                    .form-group
+                        input.form-control(type="number" name="campground[price]" value= campground.price min='0.01' step='0.01')    
+                    .form-group
+                        input.form-control(type="text" name="campground[image]" value= campground.image)
+                    .form-group
+                        input.form-control(type="text" name="campground[description]" value= campground.description)    
+                    .form-group
+                        button.btn.btn-lg.btn-primary.btn-block Submit
+                a(href='/campgrounds') Go back

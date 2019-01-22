@@ -1,0 +1,38 @@
+extends layout
+block main
+    .container
+        .row
+            .col-md-3
+                p.lead YelpCamp
+                .list-group
+                    li.list-group-item.active Info 1
+                    li.list-group-item Info 2
+                    li.list-group-item Info 3
+            .col-md-9
+                .thumbnail
+                    img.image-responsive(src= displayedCampground.image)
+                    .caption-full
+                        h4.pull-right= '$' + displayedCampground.price + '/night'
+                        a(href="")
+                            h4= displayedCampground.name    
+                        p= displayedCampground.description
+                        p
+                            em= 'Submitted By ' + displayedCampground.author.username
+                        if currentUser && displayedCampground.author.id.equals(currentUser._id)    
+                            a.btn.btn-warning(href= '/campgrounds/' + displayedCampground._id + '/edit') Edit
+                            form.delete-form(action= '/campgrounds/' + displayedCampground._id + '?_method=DELETE' method='POST')
+                                button.btn.btn-danger Delete
+                .well
+                    .text-right
+                        a(href='/campgrounds/' + displayedCampground._id + '/comments/new').btn.btn-success Add a comment
+                        hr
+                    each comment in displayedCampground.comments
+                        .row
+                            .col-md-12
+                                strong= comment.author.username
+                                span.pull-right 10 days ago
+                                p= comment.text
+                                if currentUser && comment.author.id.equals(currentUser._id)    
+                                    a.btn.btn-xs.btn-warning(href= '/campgrounds/' + displayedCampground._id + '/comments/' + comment._id + '/edit') Edit
+                                    form.delete-form(action='/campgrounds/' + displayedCampground._id + '/comments/' + comment._id + '?_method=DELETE', method='POST')
+                                        button.btn.btn-xs.btn-danger Delete

@@ -1,0 +1,36 @@
+doctype html
+html
+  head
+    meta(charset='UTF-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
+    meta(name='viewport', content='width=device-width,initial-scale=1')
+    title YelpCamp
+    link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', type='text/css')
+    link(rel='stylesheet', href='/main.css', type='text/css')
+  body
+    nav.navbar.navbar-default
+        .container-fluid
+            .navbar-header
+                a.navbar-brand(href='/') YelpCamp
+            .collapse.navbar-collapse
+                ul.nav.navbar-nav.navbar-right
+                    if !currentUser
+                        li
+                            a(href='/login') Login
+                        li
+                            a(href='/register') Sign Up
+                    else
+                        li
+                            a(href='#')= currentUser.username 
+                        li 
+                            a(href='/logout') Logout
+    .container
+        if error && error.length > 0
+            .alert.alert-danger= error
+        if success && success.length > 0
+            .alert.alert-success= success
+    block main
+    block footer
+        div
+            h6 This is a web app made by me... Not that it's that amazing, anyway
+
